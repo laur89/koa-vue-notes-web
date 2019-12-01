@@ -2,9 +2,6 @@
 // https://bootstrap-vue.js.org/docs#migrating-a-project-already-using-bootstrap
 import "mutationobserver-shim";
 
-// Older browser fix github.com/johndatserakis/koa-vue-notes-api/issues/1
-import "es6-promise/auto";
-
 // Intersection Observer polyfill
 import "intersection-observer";
 

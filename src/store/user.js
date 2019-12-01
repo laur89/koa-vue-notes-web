@@ -27,7 +27,7 @@ async function getAuthToken() {
 async function logoutOfProgram() {
   // All Vuex modules must logout here
   // Another technique, that we're using here, is to force a reload of
-  // the actual page. This ensures everything is cleared. The is the only
+  // the actual page. This ensures everything is cleared. This is the only
   // place I ever refresh the page on purpose.
   await store.dispatch("user/userLogout");
 
@@ -50,7 +50,7 @@ axios.interceptors.response.use(undefined, async error => {
       error.config.headers["Authorization"] =
         "Bearer " + store.getters["user/accessToken"];
       error.config.__isRetryRequest = true;
-      // error.config.baseURL needs to be zeroed out to prevent tripping over
+      // error.config.baseURL needs to be nuked to prevent tripping over
       // the baseURL we set in our main axios instance
       error.config.baseURL = "";
       return axios(error.config);

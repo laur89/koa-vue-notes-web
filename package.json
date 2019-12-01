@@ -8,14 +8,13 @@
     "build": "npm run test && vue-cli-service build",
     "test": "vue-cli-service test:unit --verbose",
     "lint": "vue-cli-service lint",
-    "watch": "vue-cli-service serve --open"
+    "watch": "NODE_ENV=development vue-cli-service serve --open"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.24",
     "core-js": "^2.6.5",
-    "es6-promise": "^4.2.6",
     "intersection-observer": "^0.6.0",
     "jwt-decode": "^2.2.0",
     "mutationobserver-shim": "^0.3.3",
