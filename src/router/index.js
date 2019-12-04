@@ -17,6 +17,11 @@ import Account from "@/components/Layouts/Account.vue";
 import CreateNote from "@/components/Layouts/CreateNote.vue";
 import EditNote from "@/components/Layouts/EditNote.vue";
 
+// Charts
+import Charts from "@/components/Layouts/Charts.vue";
+//import CreateNote from "@/components/Layouts/CreateNote.vue";
+//import EditNote from "@/components/Layouts/EditNote.vue";
+
 // Other
 import NotFound from "@/components/Layouts/NotFound.vue";
 
@@ -81,6 +86,14 @@ const router = new Router({
       component: EditNote,
       name: "editNote",
       meta: { title: "Edit Note", requiresAuth: true }
+    },
+
+    // Charts
+    {
+      path: "/charts",
+      component: Charts,
+      name: "charts",
+      meta: { title: "Charts", requiresAuth: true }
     }
   ],
   scrollBehavior(to, _, savedPosition) {

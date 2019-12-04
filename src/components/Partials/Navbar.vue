@@ -23,6 +23,9 @@
         </b-navbar-nav>
 
         <b-navbar-nav v-if="user" class="mr-auto">
+          <b-nav-item :to="{ name: 'charts' }">
+            Charts
+          </b-nav-item>
           <b-nav-item :to="{ name: 'account' }">
             Account
           </b-nav-item>

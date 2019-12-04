@@ -4,21 +4,18 @@
       <div class="row justify-content-center">
         <!-- This is where the main content goes. -->
         <div class="col-md-6">
-          <router-link :to="{ name: 'createNote' }" class="btn btn-primary mb-3"
-            >Create Note</router-link
-          >
-          <div v-if="!notes.length && completedFirstPass">
-            Hmm, you don't have any notes.
+          <div v-if="!charts.length && completedFirstPass">
+            Hmm, you don't have any charts.
           </div>
 
           <div class="note-block">
-            <div v-for="note in notes" :key="note.id" class="row">
+            <div v-for="chart in charts" :key="chart.id" class="row">
               <div class="col-12">
-                <div class="note-block__note" @click="editNote(note)">
+                <div class="chart-block__note" @click="viewChart(chart)">
                   <h3>
-                    <strong>{{ note.title }}</strong>
+                    <strong>{{ chart.title }}</strong>
                   </h3>
-                  <p>{{ note.content }}</p>
+                  <p>Chart ID: {{ chart.chartId }}</p>
                 </div>
               </div>
             </div>
@@ -26,7 +23,7 @@
 
           <button
             v-if="okToLoadMore"
-            @click="loadNotes"
+            @click="loadCharts"
             class="btn btn-primary"
           >
             <i class="fa fa-chevron-down fa-fw"></i>
@@ -42,7 +39,7 @@
 import { mapGetters } from "vuex";
 
 export default {
-  name: "account",
+  name: "charts",
   data() {
     return {
       completedFirstPass: false,
@@ -56,10 +53,10 @@ export default {
     };
   },
   methods: {
-    async loadNotes() {
+    async loadCharts() {
       try {
         const response = await this.$store.dispatch(
-          "note/getUsersNotes",
+          "chart/getUserCharts",
           this.query
         );
         if (response.length === this.query.limit) {
@@ -76,22 +73,22 @@ export default {
         }
       }
     },
-    editNote(note) {
-      let i = this.notes.map(note => note.id).indexOf(note.id);
+    editChart(chart) {
+      let i = this.charts.map(chart => chart.id).indexOf(chart.id);
       this.$router.push({
-        name: "editNote",
-        query: { id: this.notes[i].id }
+        name: "editChart",
+        query: { id: this.charts[i].id }
       });
     }
   },
   computed: {
     ...mapGetters({
       user: "user/user",
-      notes: "note/notes"
+      charts: "chart/charts"
     })
   },
   created() {
-    this.loadNotes();
+    this.loadCharts();
   }
 };
 </script>
@@ -99,8 +96,8 @@ export default {
 <style lang="scss" scoped>
 @import "~@/assets/css/components/_variables.scss";
 
-.note-block {
-  &__note {
+.chart-block {
+  &__chart {
     background: lighten($light-grey, 2%);
     padding: 10px;
     border-radius: 6px;
