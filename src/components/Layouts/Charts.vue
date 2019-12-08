@@ -12,7 +12,7 @@
       import Data from '../../../static-data/data.json'
 
       export default {
-            name: 'app',
+            name: 'charts',
             components: {TradingVue},
             methods: {
                   onResize() {
@@ -40,7 +40,7 @@
             mounted() {
                   window.addEventListener('resize', this.onResize);
                   this.navbar = document.getElementById('navbar-container');
-                  this.footer =  document.getElementById('footer-main');
+                  this.footer = document.getElementById('footer-main');
                   this.height = this.getHeight();
             },
             beforeDestroy() {
