@@ -4,7 +4,8 @@
 
 module.exports = {
   devServer: {
-    clientLogLevel: "info"
+    clientLogLevel: "info",
+    overlay: false,  // disable warnings-errors overlay on DOM
   },
   lintOnSave: "error",
   configureWebpack: {

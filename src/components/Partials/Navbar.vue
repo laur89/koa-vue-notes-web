@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="dark" class="navbar-section">
+    <b-navbar toggleable="lg" type="dark" class="navbar-section" id="navbar-container">
       <b-navbar-brand :to="{ name: 'home' }">
         <i class="fa fa-sticky-note fa-fw"></i> Koa-Vue-Notes
       </b-navbar-brand>
@@ -119,7 +119,7 @@ export default {
 
 //This is for the full bleed background
 //when using a container
-.navbar-section {
+#navbar-container {
   background-color: $blue;
   margin-bottom: 20px;
 

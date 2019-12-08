@@ -1,5 +1,5 @@
 <template>
-  <section class="footer-main">
+  <section id="footer-main" class="footer-main">
     <div class="container">
       <div class="row">
         <div class="col-12">
@@ -40,13 +40,13 @@ export default {
   height: 40px;
 }
 
-.footer-main {
+#footer-main {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 100px;
+  height: 50px;
   background-color: $light-grey;
-  padding: 30px 0;
+  padding: 10px 0;
   text-align: center;
   color: lighten($black, 25%);
 
