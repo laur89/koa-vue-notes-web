@@ -68,7 +68,7 @@ const router = new Router({
       meta: { title: "Reset" }
     },
 
-    // Program
+    // Program/Notes/Account
     {
       path: "/account",
       component: Account,
