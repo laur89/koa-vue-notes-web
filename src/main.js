@@ -17,6 +17,23 @@ Vue.use(Vuelidate);
 import BootstrapVue from "bootstrap-vue";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 Vue.use(BootstrapVue);
+//import io from 'socket.io-client';
+
+const sockOpts = { path: '/sock' }; //Options object to pass into SocketIO
+import VueSocketIO from 'vue-socket.io'
+Vue.use(new VueSocketIO({
+      debug: true,
+      //connection: io('http://localhost:4001', sockOpts), // options object is optional
+      //connection: process.env.VUE_APP_API_URL,
+      connection: 'http://localhost:4001',
+      vuex: {
+        store,
+        actionPrefix: "SOCKET_",
+        //mutationPrefix: "SOCKET_"
+      },
+    options: sockOpts
+    })
+);
 
 // Color issue
 // https://github.com/shakee93/vue-toasted/issues/112

@@ -25,6 +25,8 @@
                   },
                   /**
                    * Returns the element height including margins
+                   *
+                   * TODO: move out to utils class
                    * @param element - element
                    * @returns {number}
                    */
@@ -37,14 +39,36 @@
                                 .reduce((total, side) => total + side, height)
                   },
             },
+            // all keys under here will be topics we subscribe to (and will be automatically unsubscribed on unmount):
+            sockets: {
+                  connect: function () {
+                        console.log('socket connected')
+                  },
+                  customEmit: function (/*data*/) {
+                        console.log('this method was fired by the socket server. eg: io.emit("customEmit", data)')
+                  },
+                  newsTopic: function (data) {
+                        console.log('this method was fired by the socket server. eg: io.emit("newsTopic", data)' + data)
+                  }
+            },
             mounted() {
                   window.addEventListener('resize', this.onResize);
+
+                  // note this is an example of manually managing subscription-unsubscription:
+                  this.sockets.subscribe('EVENT_NAME', data => {
+                        console.log('this method was fired by the socket server. eg: io.emit("EVENT_NAME", data)' + data);
+                        this.msg = data.message;
+                  });
+
                   this.navbar = document.getElementById('navbar-container');
                   this.footer = document.getElementById('footer-main');
                   this.height = this.getHeight();
             },
             beforeDestroy() {
-                  window.removeEventListener('resize', this.onResize)
+                  window.removeEventListener('resize', this.onResize);
+
+                  // note this is an example of manually managing subscription-unsubscription:
+                  this.sockets.unsubscribe('EVENT_NAME');
             },
             data() {
                   return {
