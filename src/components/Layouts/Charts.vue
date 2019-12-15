@@ -4,7 +4,9 @@
                    :data="chart" :width="this.width" :height="this.height"
                    :color-back="colors.colorBack"
                    :color-grid="colors.colorGrid"
-                   :color-text="colors.colorText">
+                   :color-text="colors.colorText"
+                   :title-txt="this.chartName"
+      >
       </trading-vue>
 </template>
 
@@ -44,6 +46,8 @@
             // all keys under here will be topics we subscribe to (and will be automatically unsubscribed on unmount):
             sockets: {
                   CHARTITO(data) {
+                        this.chartName = data.chartName;
+
                         console.log(`GOT DATA: ${JSON.stringify(data)}`);
                         this.$set(this, 'chart', data);
                         //this.$nextTick(() =>
@@ -62,6 +66,7 @@
                   //      this.msg = data.message;
                   //});
 
+                  this.chartName = 'Waiting for downlink...';
                   this.navbar = document.getElementById('navbar-container');
                   this.footer = document.getElementById('footer-main');
                   this.onResize();
