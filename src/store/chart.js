@@ -4,18 +4,18 @@ Vue.use(Vuex);
 import axios from "@/common/axios";
 import { setAuthorizationHeader } from "@/common/utilities";
 
-const ADD_NOTES = "ADD_NOTES";
+const ADD_CHARTS = "ADD_CHARTS";
 const ADD_NOTE_TO_STACK = "ADD_NOTE_TO_STACK";
 const DELETE_NOTE_FROM_STACK = "DELETE_NOTE_FROM_STACK";
 const LOGOUT_USER = "LOGOUT_USER";
 
-const note = {
+const chart = {
   namespaced: true,
   state: {
     charts: []
   },
   mutations: {
-    ADD_NOTES(state, data) {
+    ADD_CHARTS(state, data) {
       state.charts = state.charts.concat(data);
     },
     ADD_NOTE_TO_STACK(state, note) {
@@ -49,16 +49,16 @@ const note = {
             limit: data.limit
           }
         });
-        commit(ADD_NOTES, response.data);
+        commit(ADD_CHARTS, response.data);
         return response.data;
       } catch (error) {
         return Promise.reject(error.response ? error.response : error);
       }
     },
-    async getNote({ rootGetters }, data) {
+    async getChart({ rootGetters }, algoId) {
       try {
         setAuthorizationHeader(rootGetters["user/accessToken"]);
-        const response = await axios.get("charts/" + data);
+        const response = await axios.get("charts/" + algoId);
         return response.data;
       } catch (error) {
         return Promise.reject(error.response ? error.response : error);
@@ -98,4 +98,4 @@ const note = {
   }
 };
 
-export default note;
+export default chart;

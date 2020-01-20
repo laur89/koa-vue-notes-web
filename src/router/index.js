@@ -18,7 +18,8 @@ import CreateNote from "@/components/Layouts/CreateNote.vue";
 import EditNote from "@/components/Layouts/EditNote.vue";
 
 // Charts
-import Charts from "@/components/Layouts/Charts.vue";
+import ChartList from "@/components/Layouts/ChartList.vue";
+import Chart from "@/components/Layouts/Chart.vue";
 //import CreateNote from "@/components/Layouts/CreateNote.vue";
 //import EditNote from "@/components/Layouts/EditNote.vue";
 
@@ -91,9 +92,15 @@ const router = new Router({
     // Charts
     {
       path: "/charts",
-      component: Charts,
+      component: ChartList,
       name: "charts",
-      meta: { title: "Charts", requiresAuth: true }
+      meta: { title: "Charts", requiresAuth: false }  // TODO: should we require auth?
+    },
+    {
+      path: "/chart",
+      component: Chart,
+      name: "openChart",
+      meta: { title: "Chart", requiresAuth: true }
     }
   ],
   scrollBehavior(to, _, savedPosition) {

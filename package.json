@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "bootstrap": "^4.3.1",
+    "bootstrap": "^4.4.1",
     "bootstrap-vue": "^2.0.0-rc.24",
     "core-js": "^3.4.3",
     "intersection-observer": "^0.6.0",
@@ -25,7 +25,8 @@
     "vue-socket.io": "^3.0.7",
     "vue-toasted": "^1.1.26",
     "vuelidate": "^0.7.4",
-    "vuex": "^3.1.1"
+    "vuex": "^3.1.1",
+    "lodash": "^4.17.15"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.1.1",

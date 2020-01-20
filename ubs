@@ -1,0 +1,83 @@
+[1;33mcommit cebb16e3573bda8587a364fb9c136445bf0e80de[m
+Author: Laur Aliste <laur.aliste@williamhill.com>
+Date:   Wed Dec 11 21:49:40 2019 +0100
+
+    add examples of socket subscribe-unsubscribe
+
+[38;5;11m[0m[38;5;11m───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[38;5;11mmodified: src/components/Layouts/Charts.vue
+[38;5;11m───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[1;35m@ src/components/Layouts/Charts.vue:28 @[1m[38;5;146m[0m
+                  },[m
+                  /**[m
+                   * Returns the element height including margins[m
+[1;32m[1;32m[m[1;32m                   *[m
+[0m[1;32m[1;32m[m[1;32m                   * TODO: move out to utils class[m
+[0m                   * @param element - element[m
+                   * @returns {number}[m
+                   */[m
+[1;35m@ src/components/Layouts/Charts.vue:42 @[1m[38;5;146m[0m
+                                .reduce((total, side) => total + side, height)[m
+                  },[m
+            },[m
+[1;32m[1;32m[m[1;32m            // all keys under here will be topics we subscribe to (and will be automatically unsubscribed on unmount):[m
+[0m[1;32m[1;32m[m[1;32m            sockets: {[m
+[0m[1;32m[1;32m[m[1;32m                  connect: function () {[m
+[0m[1;32m[1;32m[m[1;32m                        console.log('socket connected')[m
+[0m[1;32m[1;32m[m[1;32m                  },[m
+[0m[1;32m[1;32m[m[1;32m                  customEmit: function (/*data*/) {[m
+[0m[1;32m[1;32m[m[1;32m                        console.log('this method was fired by the socket server. eg: io.emit("customEmit", data)')[m
+[0m[1;32m[1;32m[m[1;32m                  },[m
+[0m[1;32m[1;32m[m[1;32m                  newsTopic: function (data) {[m
+[0m[1;32m[1;32m[m[1;32m                        console.log('this method was fired by the socket server. eg: io.emit("newsTopic", data)' + data)[m
+[0m[1;32m[1;32m[m[1;32m                  }[m
+[0m[1;32m[1;32m[m[1;32m            },[m
+[0m            mounted() {[m
+                  window.addEventListener('resize', this.onResize);[m
+[7m[1;32m [m
+[1;32m[1;32m[m[1;32m                  // note this is an example of manually managing subscription-unsubscription:[m
+[0m[1;32m[1;32m[m[1;32m                  this.sockets.subscribe('EVENT_NAME', data => {[m
+[0m[1;32m[1;32m[m[1;32m                        console.log('this method was fired by the socket server. eg: io.emit("EVENT_NAME", data)' + data);[m
+[0m[1;32m[1;32m[m[1;32m                        this.msg = data.message;[m
+[0m[1;32m[1;32m[m[1;32m                  });[m
+[0m[7m[1;32m [m
+                  this.navbar = document.getElementById('navbar-container');[m
+                  this.footer = document.getElementById('footer-main');[m
+                  this.height = this.getHeight();[m
+            },[m
+            beforeDestroy() {[m
+[1;31m[1;31m                  window.removeEventListener('resize', this.onResize)[m
+[0m[1;32m[1;32m[m[1;32m                  window.removeEventListener('resize', this.onResize);[m
+[0m[7m[1;32m [m
+[1;32m[1;32m[m[1;32m                  // note this is an example of manually managing subscription-unsubscription:[m
+[0m[1;32m[1;32m[m[1;32m                  this.sockets.unsubscribe('EVENT_NAME');[m
+[0m            },[m
+            data() {[m
+                  return {[m
+[38;5;11m[0m[38;5;11m───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[38;5;11mmodified: src/main.js
+[38;5;11m───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[1;35m@ src/main.js:20 @[1m[38;5;146m Vue.use(Vuelidate);[0m
+import BootstrapVue from "bootstrap-vue";[m
+import "bootstrap-vue/dist/bootstrap-vue.css";[m
+Vue.use(BootstrapVue);[m
+[1;32m[1;32m[m[1;32m//import io from 'socket.io-client';[m
+[0m[7m[1;32m [m
+[1;32m[1;32m[m[1;32mconst sockOpts = { path: '/sock' }; //Options object to pass into SocketIO[m
+[0m[1;32m[1;32m[m[1;32mimport VueSocketIO from 'vue-socket.io'[m
+[0m[1;32m[1;32m[m[1;32mVue.use(new VueSocketIO({[m
+[0m[1;32m[1;32m[m[1;32m      debug: true,[m
+[0m[1;32m[1;32m[m[1;32m      //connection: io('http://localhost:4001', sockOpts), // options object is optional[m
+[0m[1;32m[1;32m[m[1;32m      //connection: process.env.VUE_APP_API_URL,[m
+[0m[1;32m[1;32m[m[1;32m      connection: 'http://localhost:4001',[m
+[0m[1;32m[1;32m[m[1;32m      vuex: {[m
+[0m[1;32m[1;32m[m[1;32m        store,[m
+[0m[1;32m[1;32m[m[1;32m        actionPrefix: "SOCKET_",[m
+[0m[1;32m[1;32m[m[1;32m        //mutationPrefix: "SOCKET_"[m
+[0m[1;32m[1;32m[m[1;32m      },[m
+[0m[1;32m[1;32m[m[1;32m    options: sockOpts[m
+[0m[1;32m[1;32m[m[1;32m    })[m
+[0m[1;32m[1;32m[m[1;32m);[m
+[0m[m
+// Color issue[m
+// https://github.com/shakee93/vue-toasted/issues/112[m
