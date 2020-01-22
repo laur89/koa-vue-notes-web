@@ -55,10 +55,28 @@ const chart = {
         return Promise.reject(error.response ? error.response : error);
       }
     },
-    async getChart({ rootGetters }, algoId) {
+    async getChartSlice({ rootGetters }, params) {
       try {
         setAuthorizationHeader(rootGetters["user/accessToken"]);
-        const response = await axios.get("charts/" + algoId);
+        const response = await axios.get(`charts/${params.id}/slice`, {
+          params: {
+            start: params.start,
+            end: params.end,
+          }
+        });
+        return response.data;
+      } catch (error) {
+        return Promise.reject(error.response ? error.response : error);
+      }
+    },
+    async getChartTail({ rootGetters }, params) {
+      try {
+        setAuthorizationHeader(rootGetters["user/accessToken"]);
+        const response = await axios.get(`charts/${params.id}/tail`, {
+          params: {
+            span: params.span
+          }
+        });
         return response.data;
       } catch (error) {
         return Promise.reject(error.response ? error.response : error);

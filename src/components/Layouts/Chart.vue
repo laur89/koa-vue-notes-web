@@ -43,6 +43,41 @@
                         //return window.innerHeight - 100 - 76;  // 100 is tied to footer; 76 seems to be hdr 56 +20 padding?
                         return window.innerHeight - this.footer.offsetHeight - outerHeight(this.navbar)
                   },
+                  notify(msg) {
+                        this.$toasted.show(msg,  {
+                              theme: "toasted-primary",
+                              position: "top-right",
+                              //icon: 'check',
+                              duration : 5000
+                        });
+                  },
+                  async getTail() {
+                        try {
+                              return await this.$store.dispatch(
+                                      'chart/getChartTail',
+                                      {
+                                            id: this.algoId,
+                                            span: 6000 * 1000 // TODO find a way to define
+                                      }
+                              );
+                        } catch (error) {
+                              this.$toasted.error("There was an error connecting to the server.");
+                        }
+                  },
+                  async getSlice(start, end) {
+                        try {
+                              return await this.$store.dispatch(
+                                      'chart/getChartSlice',
+                                      {
+                                            id: this.algoId,
+                                            start,
+                                            end
+                                      }
+                              );
+                        } catch (error) {
+                              this.$toasted.error("There was an error connecting to the server.");
+                        }
+                  },
                   clickButton(data) {
                         // $socket is socket.io-client instance
                         this.$socket.emit('emit_method', data)
@@ -68,9 +103,12 @@
             sockets: {
                   // note connect is also filed on re-connections, so do not subscribe to rooms/events in here!
                   connect() {
-                        console.log('socket connected')
+                        console.log('socket connected');
+                        this.notify('socket connected')
                   },
                   chart(data_) {
+                        this.notify('chart update via SOCK');
+
                         // received update for main chart:
                         // TODO: do we have/want to call .set() on very first init, or can go with merge()? note no add() for 'chart';
                         //data.{id,meta,data}
@@ -100,6 +138,8 @@
                         //this.$emit('scroll-lock', true)
                   },
                   onchart(data_) {
+                        this.notify('onchart update via SOCK');
+
                         // received update for main chart:
                         // TODO: do we have/want to call .set() on very first init, or can go with merge()? note no add() for 'chart';
                         //data.{id,meta,data}
@@ -118,13 +158,30 @@
                   //offchart(data_) {
             },
             mounted() {
+                  this.notify('we are mounted');
+
                   this.navbar = document.getElementById('navbar-container');
                   this.footer = document.getElementById('footer-main');
                   this.algoId = this.$route.query.id;  // store it as $routes might not see query params on beforeDestroy()
 
                   this.onResize();
                   window.addEventListener('resize', this.onResize);
-                  this.$socket.emit('sub_chart', this.algoId);
+
+                  this.getTail().then(result => {
+                        result  || this.notify('!!falsy tail received');
+                        this.notify(`!!tail received, keys: ${Object.keys(result)}`);
+
+                        this.chartName = result.chart.chartName;
+                        delete result.chart.chartName;
+
+                        this.dc.set('chart', result.chart);
+                        this.dc.set('onchart', result.onchart);
+                        this.dc.set('offchart', result.offchart);
+
+
+                        // TODO: pass last fetched element back to sub_chart in case something got emitted between our response was compiled and when we subed?:
+                        this.$socket.emit('sub_chart', this.algoId);
+                  });
             },
             beforeDestroy() {
                   this.$socket.emit('unsub_chart', this.algoId);
