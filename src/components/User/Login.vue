@@ -24,6 +24,7 @@
                     name="signup-form-username"
                     id="signup-form-username"
                     v-model.trim="credentials.username"
+                    autofocus
                     @input="$v.credentials.username.$touch()"
                   />
                   <div
