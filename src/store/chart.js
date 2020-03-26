@@ -60,8 +60,9 @@ const chart = {
         setAuthorizationHeader(rootGetters["user/accessToken"]);
         const response = await axios.get(`charts/${params.id}/slice`, {
           params: {
-            start: params.start,
-            end: params.end,
+            anchorTime: params.anchorTime,
+            numberOfDataPoints: params.numberOfDataPoints,
+            direction: params.direction,
           }
         });
         return response.data;
