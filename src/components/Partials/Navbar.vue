@@ -2,7 +2,8 @@
   <div>
     <b-navbar toggleable="lg" type="dark" class="navbar-section" id="navbar-container">
       <b-navbar-brand :to="{ name: 'home' }">
-        <i class="fa fa-sticky-note fa-fw"></i> Koa-Vue-Notes
+        <!--<i class="fa fa-sticky-note fa-fw"></i> Koa-Vue-Notes-->
+        <img src="@/assets/lean-logo-3.png">
       </b-navbar-brand>
 
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
@@ -69,7 +70,7 @@
               href="https://github.com/johndatserakis/"
               class="navbar-text mr-sm-3"
               target="_blank"
-              ><i class="fa fa-info-circle fa-fw"></i
+              ><i class="fa fa-cog fa-fw"></i
             ></a>
           </li>
         </b-navbar-nav>

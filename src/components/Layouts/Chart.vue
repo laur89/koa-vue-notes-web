@@ -213,7 +213,7 @@
             mounted() {
                   this.notify('we are mounted');
 
-                  this.navbar = document.getElementById('navbar-container');
+                  this.navbar = document.getElementById('navbar-container');  // TODO: this should be a getter in common.js instead!
                   if (this.showFooter) this.footer = document.getElementById('footer-main');
                   this.algoId = this.$route.query.id;  // store it as $routes might not see query params on beforeDestroy()
 
