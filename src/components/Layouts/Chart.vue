@@ -21,6 +21,7 @@
 <script>
       import {TradingVue, DataCube} from 'trading-vue-js';
       import { isEmpty } from 'lodash-es';
+      import { mapMutations, mapState } from 'vuex';
       //import Data from '../../../static-data/data.json'
 
       /**
@@ -49,7 +50,10 @@
                   },
                   getHeight() {
                         //return window.innerHeight - 100 - 76;  // 100 is tied to footer; 76 seems to be hdr 56 +20 padding?
-                        return window.innerHeight - this.footer.offsetHeight - outerHeight(this.navbar)
+                        let i = window.innerHeight - outerHeight(this.navbar);
+                        if (this.showFooter) i -= this.footer.offsetHeight;
+
+                        return i;
                   },
                   notify(msg) {
                         this.$toasted.show(msg,  {
@@ -124,7 +128,7 @@
                   clickButton(data) {
                         // $socket is socket.io-client instance
                         this.$socket.emit('emit_method', data)
-                  }
+                  },
                   //sub: function (chartId) {
                         // $socket is socket.io-client instance
                         //this.$socket.on(chartId, data => {
@@ -141,6 +145,9 @@
                         // subscribe us to $chartId events:
                         //      this.$socket.emit('sub_chart', chartId)
                   //}
+                  ...mapMutations('common', [
+                        'SET_FOOTER_VISIBILITY',
+                  ]),
             },
             // all keys under here will be topics we subscribe to (and will be automatically unsubscribed on unmount):
             sockets: {
@@ -200,11 +207,14 @@
                   },
                   //offchart(data_) {
             },
+            created() {
+                  this.SET_FOOTER_VISIBILITY(false);
+            },
             mounted() {
                   this.notify('we are mounted');
 
                   this.navbar = document.getElementById('navbar-container');
-                  this.footer = document.getElementById('footer-main');
+                  if (this.showFooter) this.footer = document.getElementById('footer-main');
                   this.algoId = this.$route.query.id;  // store it as $routes might not see query params on beforeDestroy()
 
                   this.onResize();
@@ -220,6 +230,7 @@
             beforeDestroy() {
                   this.$socket.emit('unsub_chart', this.algoId);
                   window.removeEventListener('resize', this.onResize);
+                  this.SET_FOOTER_VISIBILITY(true);
 
                   // note this is an example of manually managing subscription-unsubscription:
                   //this.sockets.unsubscribe(chartId);
@@ -257,6 +268,9 @@
                               colorText: '#333'
                         }
                   },
+                  ...mapState({
+                        showFooter: state => state.common.showFooter,
+                  }),
             },
       };
 </script>

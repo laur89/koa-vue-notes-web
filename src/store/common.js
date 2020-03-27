@@ -7,6 +7,12 @@ const common = {
 
   state: {
     theme: 'primary',
+    showFooter: true,
+  },
+  mutations: {
+    SET_FOOTER_VISIBILITY(state, show) {
+      state.showFooter = show;
+    },
   },
 };
 

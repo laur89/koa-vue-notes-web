@@ -1,5 +1,5 @@
 <template>
-  <section id="footer-main" class="footer-main">
+  <section v-if="show" id="footer-main" class="footer-main">
     <div class="container">
       <div class="row">
         <div class="col-12">
@@ -21,13 +21,19 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: "footer-main",
   data() {
     return {};
   },
   methods: {},
-  computed: {}
+  computed: {
+    ...mapState({
+      show: state => state.common.showFooter,
+    }),
+  }
 };
 </script>
 
