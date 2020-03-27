@@ -27,7 +27,8 @@
           <button
             id="create-note-button"
             @click="createNote"
-            class="btn btn-primary btn-block"
+            class="btn btn-block"
+            :class="['btn-' + theme]"
           >
             <i class="fa fa-save fa-fw"></i> Save
           </button>
@@ -38,7 +39,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from 'vuex';
 
 export default {
   name: "editNote",
@@ -79,7 +80,10 @@ export default {
     ...mapGetters({
       user: "user/user",
       notes: "note/notes"
-    })
+    }),
+    ...mapState({
+      theme: state => state.common.theme,
+    }),
   },
   created() {}
 };

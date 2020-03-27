@@ -4,9 +4,11 @@
       <div class="row justify-content-center">
         <!-- This is where the main content goes. -->
         <div class="col-md-6">
-          <router-link :to="{ name: 'createNote' }" class="btn btn-primary mb-3"
-            >Create Note</router-link
-          >
+          <router-link :to="{ name: 'createNote' }"
+                       class="btn mb-3"
+                       :class="['btn-' + theme]">
+            Create Note
+          </router-link>
           <div v-if="!notes.length && completedFirstPass">
             Hmm, you don't have any notes.
           </div>
@@ -27,7 +29,8 @@
           <button
             v-if="okToLoadMore"
             @click="loadNotes"
-            class="btn btn-primary"
+            class="btn"
+            :class="['btn-' + theme]"
           >
             <i class="fa fa-chevron-down fa-fw"></i>
             Load More
@@ -39,7 +42,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 
 export default {
   name: "account",
@@ -85,10 +88,13 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({
+    ...mapGetters({  // shouldn't/couldn't we use mapState() here instead, given those getters only access the state object, no other computation is performed
       user: "user/user",
-      notes: "note/notes"
-    })
+      notes: "note/notes",
+    }),
+    ...mapState({
+      theme: state => state.common.theme,
+    }),
   },
   created() {
     this.loadNotes();

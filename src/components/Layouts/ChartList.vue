@@ -4,8 +4,11 @@
       <div class="row justify-content-center">
         <!-- This is where the main content goes. -->
         <div class="col-md-6">
-          <router-link :to="{ name: 'createNote' }" class="btn btn-primary mb-3"
-            >Create Note TODO delme</router-link
+          <router-link
+                  :to="{ name: 'createNote' }"
+                  class="btn mb-3"
+                  :class="['btn-' + theme]">
+            Create Note TODO delme</router-link
           >
           <div v-if="!charts.length && completedFirstPass">
             Looks like no current nor historic algo charts are available.
@@ -18,7 +21,9 @@
                   <h3>
                     <strong>{{ chart.id }}</strong>
                   </h3>
-                  <p>{{ chart.type }}</p>
+                  <p>type: {{ chart.type }}</p>
+                  <p>started @ {{ chart.startedAt }}</p>
+                  <p>live: {{ !!chart.running }}</p>
                 </div>
               </div>
             </div>
@@ -27,7 +32,8 @@
           <button
             v-if="okToLoadMore"
             @click="loadAlgos"
-            class="btn btn-primary"
+            class="btn"
+            :class="['btn-' + theme]">
           >
             <i class="fa fa-chevron-down fa-fw"></i>
             Load More
@@ -39,7 +45,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import {mapGetters, mapState} from 'vuex';
 
 export default {
   name: "account",
@@ -87,7 +93,10 @@ export default {
     ...mapGetters({
       user: "user/user",
       charts: "chart/charts"
-    })
+    }),
+    ...mapState({
+      theme: state => state.common.theme,
+    }),
   },
   created() {
     this.loadAlgos();

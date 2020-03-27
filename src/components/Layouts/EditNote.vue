@@ -28,7 +28,10 @@
               <label>Content</label>
               <textarea class="form-control" v-model="note.content"></textarea>
             </div>
-            <button @click="saveNote" class="btn btn-primary btn-block mb-3">
+            <button @click="saveNote"
+                    class="btn btn-block mb-3"
+                    :class="['btn-' + theme]"
+            >
               <i class="fa fa-save fa-fw"></i> Save
             </button>
             <button @click="confirmDeleteNote" class="btn btn-danger">
@@ -54,7 +57,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from 'vuex';
 
 export default {
   name: "editNote",
@@ -113,7 +116,10 @@ export default {
     ...mapGetters({
       user: "user/user",
       notes: "note/notes"
-    })
+    }),
+    ...mapState({
+      theme: state => state.common.theme,
+    }),
   },
   created() {
     this.loadNote();
