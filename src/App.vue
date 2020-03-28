@@ -8,17 +8,16 @@
       <router-view></router-view>
     </keep-alive>
 
-    <div class="sticky-footer-spacing"></div>
     <footer-main></footer-main>
   </div>
 </template>
 
 <script>
-import Navbar from "@/components/Partials/Navbar";
-import FooterMain from "@/components/Partials/FooterMain";
+import Navbar from '@/components/Partials/Navbar';
+import FooterMain from '@/components/Partials/FooterMain';
 
 export default {
-  name: "app",
+  name: 'app',
   components: {
     Navbar,
     FooterMain

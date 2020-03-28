@@ -23,7 +23,7 @@
                   </h3>
                   <p>type: {{ chart.type }}</p>
                   <p>started @ {{ chart.startedAt }}</p>
-                  <p>live: {{ !!chart.running }}</p>
+                  <p>running: {{ !!chart.running }}</p>
                 </div>
               </div>
             </div>

@@ -1,7 +1,9 @@
 <template>
       <div>
             <!-- This tmpl based on TradingVueJs 101 (example from 'Getting Started' ) -->
-            <trading-vue ref="tradingVue"
+            <trading-vue :id="['chart-view-' + this.algoId]"
+                         class='chart-view'
+                         ref="tradingVue"
                          :gap_collapse="2"
                          :data="chart" :width="width" :height="height"
                          :title-txt="this.chartName"
@@ -9,8 +11,7 @@
                          :color-back="colors.colorBack"
                          :color-grid="colors.colorGrid"
                          :color-text="colors.colorText">
-            >
-            </trading-vue>
+            ></trading-vue>
             <span class="night-mode">
                   <input type="checkbox" v-model="night">
                   <label>NM</label>
@@ -208,16 +209,31 @@
                   //offchart(data_) {
             },
             created() {
-                  this.SET_FOOTER_VISIBILITY(false);
+                  this.algoId = this.$route.query.id;
+                  this.oldFooterVisibility = this.showFooter;
+
+                  if (this.oldFooterVisibility) {  // if footer is shown, hide it
+                        this.SET_FOOTER_VISIBILITY(false);
+                  }
             },
             mounted() {
                   this.notify('we are mounted');
 
                   this.navbar = document.getElementById('navbar-container');  // TODO: this should be a getter in common.js instead!
                   if (this.showFooter) this.footer = document.getElementById('footer-main');
-                  this.algoId = this.$route.query.id;  // store it as $routes might not see query params on beforeDestroy()
 
                   this.onResize();
+
+                  // we listen for the readystatechange because otherwise the chart won't be
+                  // resized to correct height in case we load the page directly with chart,
+                  // as the header height+margins haven't properly set yet, thus outerHeight() lies:
+                  document.onreadystatechange = () => {
+                        if (document.readyState === 'complete') this.onResize();
+                  };
+                        //document.addEventListener('readystatechange', () => {
+                        //      if (document.readyState === 'complete') this.onResize();
+                        //});
+
                   window.addEventListener('resize', this.onResize);
 
                   this.chart.setDataHandlers({
@@ -230,7 +246,7 @@
             beforeDestroy() {
                   this.$socket.emit('unsub_chart', this.algoId);
                   window.removeEventListener('resize', this.onResize);
-                  this.SET_FOOTER_VISIBILITY(true);
+                  this.SET_FOOTER_VISIBILITY(this.oldFooterVisibility);  // restore footer visibility
 
                   // note this is an example of manually managing subscription-unsubscription:
                   //this.sockets.unsubscribe(chartId);
@@ -274,8 +290,9 @@
             },
       };
 </script>
-<style>
-      section#chart-view {
+
+<style lang="scss" scoped>
+      .chart-view {
             background-color: #000;
             margin: 0;
             padding: 0;
