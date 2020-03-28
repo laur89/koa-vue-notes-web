@@ -28,11 +28,11 @@
             user info.
           </p>
 
-          <p v-if="user"><i class="fa fa-user fa-fw"></i> You: {{ user }}</p>
+          <p v-if="user"><font-awesome-icon icon="user" fixed-width /> You: {{ user }}</p>
           <p v-else>Hmm, you are not logged in.</p>
 
           <p>
-            <i class="fa fa-info-circle fa-fw"></i> This is a simple SPA built
+            <font-awesome-icon icon="info-circle" fixed-width /> This is a simple SPA built
             using Koa (2.5.1) as the backend and Vue (2.6.8) as the frontend. If
             you don't want to create an account you can just use
             <strong>demousername</strong> and <strong>demopassword</strong> to

@@ -192,8 +192,7 @@
                   @click="submit()"
                 >
                   <span v-if="pending"
-                    ><i class="fa fa-circle-o-notch fa-spin fa-fw"></i
-                  ></span>
+                    ><font-awesome-icon icon="circle-notch" fixed-width spin /></span>
                   <span v-else>Signup</span>
                 </button>
 

@@ -33,9 +33,9 @@
             v-if="okToLoadMore"
             @click="loadAlgos"
             class="btn"
-            :class="['btn-' + theme]">
+            :class="['btn-' + theme]"
           >
-            <i class="fa fa-chevron-down fa-fw"></i>
+            <font-awesome-icon icon="chevron-down" fixed-width />
             Load More
           </button>
         </div>

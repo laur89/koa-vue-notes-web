@@ -9,7 +9,7 @@
             :to="{ name: 'account' }"
             class="mb-3"
           >
-            <i class="fa fa-angle-left fa-fw"></i>
+            <font-awesome-icon icon="angle-left" fixed-width />
             Back
           </b-button>
 
@@ -30,7 +30,7 @@
             class="btn btn-block"
             :class="['btn-' + theme]"
           >
-            <i class="fa fa-save fa-fw"></i> Save
+            <font-awesome-icon icon="save" fixed-width /> Save
           </button>
         </div>
       </div>

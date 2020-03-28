@@ -25,7 +25,3 @@ export default {
   }
 };
 </script>
-
-<style>
-@import "https://cdn.jsdelivr.net/fontawesome/4.7.0/css/font-awesome.min.css";
-</style>

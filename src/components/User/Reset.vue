@@ -77,9 +77,8 @@
                   @click="submit()"
                 >
                   <span v-if="pending"
-                    ><i class="fa fa-circle-o-notch fa-spin fa-fw"></i
-                  ></span>
-                  <span v-else><i class="fa fa-refresh"></i> Reset</span>
+                    ><font-awesome-icon icon="circle-notch" fixed-width spin /></span>
+                  <span v-else><font-awesome-icon icon="sync-alt" /> Reset</span>
                 </button>
 
                 <div class="mt-4 small">

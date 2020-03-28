@@ -70,8 +70,8 @@
               href="https://github.com/johndatserakis/"
               class="navbar-text mr-sm-3"
               target="_blank"
-              ><i class="fa fa-cog fa-fw"></i
-            ></a>
+              ><font-awesome-icon icon="user-cog" fixed-width />
+            </a>
           </li>
         </b-navbar-nav>
       </b-collapse>

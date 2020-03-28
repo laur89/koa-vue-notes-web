@@ -12,7 +12,7 @@
             :to="{ name: 'account' }"
             class="mb-3"
           >
-            <i class="fa fa-angle-left fa-fw"></i>
+            <font-awesome-icon icon="angle-left" fixed-width />
             Back
           </b-button>
 
@@ -32,10 +32,10 @@
                     class="btn btn-block mb-3"
                     :class="['btn-' + theme]"
             >
-              <i class="fa fa-save fa-fw"></i> Save
+              <font-awesome-icon icon="save" fixed-width /> Save
             </button>
             <button @click="confirmDeleteNote" class="btn btn-danger">
-              <i class="fa fa-trash fa-fw"></i> Delete Note
+              <font-awesome-icon icon="trash" fixed-width /> Delete Note
             </button>
           </div>
         </div>
@@ -47,7 +47,7 @@
       >
         <div class="col-md-12">
           <p>
-            <i class="fa fa-frown-o fa-fw"></i> Hmm, that note couldn't be
+            <font-awesome-icon icon="frown-open" fixed-width /> Hmm, that note couldn't be
             found.
           </p>
         </div>

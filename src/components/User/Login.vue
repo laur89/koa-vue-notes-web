@@ -67,11 +67,9 @@
                   @click="submit()"
                 >
                   <span v-if="pending"
-                    ><i class="fa fa-circle-o-notch fa-spin fa-fw"></i
-                  ></span>
+                    ><font-awesome-icon icon="circle-notch" fixed-width spin /></span>
                   <span v-else
-                    >Login <i class="fa fa-long-arrow-right"></i
-                  ></span>
+                    >Login <font-awesome-icon icon="long-arrow-alt-right" /></span>
                 </button>
 
                 <div class="mt-4 small">

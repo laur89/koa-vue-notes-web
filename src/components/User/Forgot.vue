@@ -40,9 +40,8 @@
                   @click="submit()"
                 >
                   <span v-if="pending"
-                    ><i class="fa fa-circle-o-notch fa-spin fa-fw"></i
-                  ></span>
-                  <span v-else><i class="fa fa-paper-plane"></i> Send</span>
+                    ><font-awesome-icon icon="circle-notch" fixed-width spin /></span>
+                  <span v-else><font-awesome-icon icon="paper-plane" /> Send</span>
                 </button>
 
                 <div class="mt-4 small">
