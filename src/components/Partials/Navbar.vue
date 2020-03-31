@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar id="navbar-container" toggleable="lg" class="navbar-section"
+    <b-navbar id="navbar-container" toggleable="lg" class="navbar-section shadow"
               :variant="theme.hdr.variant"
               :fixed="theme.hdr.fixed"
               :type="theme.hdr.lightOrDark">
