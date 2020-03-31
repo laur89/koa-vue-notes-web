@@ -28,7 +28,7 @@
             id="create-note-button"
             @click="createNote"
             class="btn btn-block"
-            :class="['btn-' + theme]"
+            :class="['btn-' + theme.btn]"
           >
             <font-awesome-icon icon="save" fixed-width /> Save
           </button>

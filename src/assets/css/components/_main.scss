@@ -6,9 +6,9 @@ html {
 body {
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
-  color: $font-color;
+  //color: $font-color;  // moved to theming
   font-weight: 400;
-  background: $white;
+  //background: $white;  // moved to theming
   font-family: $font-family-base;
   //margin-bottom: 50px; //tied to footer height or what?
 }

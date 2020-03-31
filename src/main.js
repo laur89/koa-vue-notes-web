@@ -15,7 +15,7 @@ import Vuelidate from "vuelidate";
 Vue.use(Vuelidate);
 
 import BootstrapVue from "bootstrap-vue";
-import "bootstrap-vue/dist/bootstrap-vue.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";  // TODO: unsure how necessary this is; we're already including some bootstrap css from app.scss
 Vue.use(BootstrapVue);
 //import io from 'socket.io-client';
 

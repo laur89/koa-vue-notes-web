@@ -4,7 +4,7 @@
     <p>Hmm, we couldn't quite find what you were looking for.</p>
     <router-link to="/"
                  class="btn"
-                 :class="['btn-' + theme]">
+                 :class="['btn-' + theme.btn]">
     Go Home</router-link>
   </div>
 </template>
