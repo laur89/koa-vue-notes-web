@@ -6,15 +6,8 @@
         <div class="row">
           <div class="col-12">
             <p>
-              <a href="https://github.com/johndatserakis">Koa-Vue-Notes</a> is a
-              SPA using Koa (2.3) as the
-              <a href="https://github.com/johndatserakis/koa-vue-notes-api"
-                >backend</a
-              >
-              and Vue (2.6.10) as the
-              <a href="https://github.com/johndatserakis/koa-vue-notes-api"
-                >frontend</a
-              >.
+              Charting platform powered by <a href="https://github.com/QuantConnect/Lean">LEAN trading engine</a>,
+              a <a href="https://www.quantconnect.com">QuantConnect product</a>
             </p>
           </div>
         </div>
