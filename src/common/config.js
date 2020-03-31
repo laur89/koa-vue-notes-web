@@ -19,6 +19,7 @@ const themes = {
         },
         userBlock: {
             bg: 'primary',
+            txt: 'white',
         },
     },
 };

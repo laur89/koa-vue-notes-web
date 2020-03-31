@@ -3,10 +3,9 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <div class="user-block" :class="['bg-' + theme.userBlock.bg]">
-            <h1 class="user-block__header">Forgot Password</h1>
+          <div class="user-block" :class="['bg-' + theme.userBlock.bg, 'text-' + theme.userBlock.txt]">
+            <h1>Forgot Password</h1>
 
-            <div class="user-block__content">
               <form v-on:submit.prevent autocomplete="off">
                 <div
                   class="form-group"
@@ -60,7 +59,6 @@
                   </p>
                 </div>
               </form>
-            </div>
           </div>
         </div>
       </div>
