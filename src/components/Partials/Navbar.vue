@@ -1,12 +1,16 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="dark" class="navbar-section" id="navbar-container">
+    <b-navbar id="navbar-container" toggleable="lg" class="navbar-section"
+              :variant="theme.hdr.variant"
+              :fixed="theme.hdr.fixed"
+              :type="theme.hdr.lightOrDark">
+      <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
+
       <b-navbar-brand :to="{ name: 'home' }">
         <!--<i class="fa fa-sticky-note fa-fw"></i> Koa-Vue-Notes-->
-        <img src="@/assets/lean-logo-3.png">
+        <img v-if="theme.hdr.lightOrDark === 'dark'" src="@/assets/lean-logo-3.png" alt="Powered by QC Lean">
+        <img v-else src="@/assets/lean-logo-2.png" alt="Powered by QC Lean">
       </b-navbar-brand>
-
-      <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
       <b-collapse is-nav id="nav_collapse">
         <b-navbar-nav v-if="!user" class="mr-auto">
@@ -30,18 +34,10 @@
           <b-nav-item :to="{ name: 'account' }">
             Account
           </b-nav-item>
-
-          <a
-            href="javascript:void(0)"
-            v-if="user"
-            @click="logout"
-            class="nav-link"
-            >Logout</a
-          >
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto">
-          <li class="nav-item">
+          <!--li class="nav-item">
             <a
               href="https://koa-react-notes-web.innermonkdesign.com"
               class="navbar-text mr-sm-3"
@@ -72,7 +68,16 @@
               target="_blank"
               ><font-awesome-icon icon="user-cog" fixed-width />
             </a>
-          </li>
+          </li-->
+
+          <b-nav-item-dropdown v-if="user" id="user-cog-nav-dropdown" right>
+            <template slot="button-content"><font-awesome-icon icon="user-cog" fixed-width /></template>
+            <b-dropdown-item @click="logout">Logout</b-dropdown-item>
+            <b-dropdown-item>two</b-dropdown-item>
+            <b-dropdown-divider></b-dropdown-divider>
+            <b-dropdown-item>three</b-dropdown-item>
+          </b-nav-item-dropdown>
+
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -80,7 +85,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 
 export default {
   name: "navbar",
@@ -106,7 +111,10 @@ export default {
   computed: {
     ...mapGetters({
       user: "user/user"
-    })
+    }),
+    ...mapState({
+      theme: state => state.common.theme,
+    }),
   }
 };
 </script>
@@ -114,14 +122,14 @@ export default {
 <style lang="scss" scoped>
 @import "~@/assets/css/components/_variables.scss";
 
-.fa-sticky-note {
-  color: yellow;
-}
+//.fa-sticky-note {
+//  color: yellow;
+//}
 
 //This is for the full bleed background
 //when using a container
 #navbar-container {
-  background-color: $blue;
+  //background-color: $blue;  // controlled by 'variant' class
   margin-bottom: 20px;
 
   .container-nav {

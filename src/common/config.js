@@ -9,7 +9,15 @@ const themes = {
         btn: 'primary',  // bootstrap key
         txt: '#222',  // raw
         bg: 'white',  // raw
-    }
+        hdr: {
+            variant: 'primary',
+            lightOrDark: 'dark',  // 'dark' if background is dark(ish)
+            fixed: null,  // fixed to top, ie always visible; null, 'top' or 'bottom'
+        },
+        ftr: {  // footer
+
+        },
+    },
 };
 
 export { themes };

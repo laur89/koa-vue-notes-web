@@ -20,14 +20,13 @@ import EditNote from "@/components/Layouts/EditNote.vue";
 // Charts
 import ChartList from "@/components/Layouts/ChartList.vue";
 import Chart from "@/components/Layouts/Chart.vue";
-//import CreateNote from "@/components/Layouts/CreateNote.vue";
-//import EditNote from "@/components/Layouts/EditNote.vue";
 
 // Other
 import NotFound from "@/components/Layouts/NotFound.vue";
 
 const router = new Router({
   mode: "history",
+  linkActiveClass: 'active',  // so bootstrap can highlight navbar accordingly
   routes: [
     // Main
     {
