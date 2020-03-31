@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <div class="user-block">
+          <div class="user-block" :class="['bg-' + theme.userBlock.bg]">
             <h1 class="user-block__header">Forgot Password</h1>
 
             <div class="user-block__content">
@@ -23,6 +23,7 @@
                     class="form-control"
                     name="signup-form-email"
                     id="signup-form-email"
+                    autofocus
                     v-model.trim="credentials.email"
                     @input="$v.credentials.email.$touch()"
                   />
@@ -69,6 +70,7 @@
 
 <script>
 import { required } from "vuelidate/lib/validators";
+import { mapState } from "vuex";
 
 export default {
   name: "forgot",
@@ -110,6 +112,11 @@ export default {
         this.pending = false;
       }
     }
+  },
+  computed: {
+    ...mapState({
+      theme: state => state.common.theme,
+    }),
   },
   validations: {
     credentials: {

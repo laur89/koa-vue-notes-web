@@ -17,6 +17,9 @@ const themes = {
         ftr: {  // footer
 
         },
+        userBlock: {
+            bg: 'primary',
+        },
     },
 };
 

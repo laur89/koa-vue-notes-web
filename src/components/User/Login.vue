@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <div class="user-block">
+          <div class="user-block" :class="['bg-' + theme.userBlock.bg]">
             <h1 class="user-block__header">Login</h1>
 
             <div class="user-block__content">
@@ -96,6 +96,7 @@
 
 <script>
 import { required } from "vuelidate/lib/validators";
+import { mapState } from "vuex";
 
 export default {
   name: "login",
@@ -134,6 +135,11 @@ export default {
         this.pending = false;
       }
     }
+  },
+  computed: {
+    ...mapState({
+      theme: state => state.common.theme,
+    }),
   },
   validations: {
     credentials: {
