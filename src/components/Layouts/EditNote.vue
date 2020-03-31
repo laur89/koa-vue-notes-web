@@ -30,7 +30,7 @@
             </div>
             <button @click="saveNote"
                     class="btn btn-block mb-3"
-                    :class="['btn-' + theme.btn]"
+                    :class="['btn-' + theme.btn.main]"
             >
               <font-awesome-icon icon="save" fixed-width /> Save
             </button>

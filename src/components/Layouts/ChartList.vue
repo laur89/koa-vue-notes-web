@@ -7,7 +7,7 @@
           <router-link
                   :to="{ name: 'createNote' }"
                   class="btn mb-3"
-                  :class="['btn-' + theme.btn]">
+                  :class="['btn-' + theme.btn.main]">
             Create Note TODO delme</router-link
           >
           <div v-if="!charts.length && completedFirstPass">
@@ -33,7 +33,7 @@
             v-if="okToLoadMore"
             @click="loadAlgos"
             class="btn"
-            :class="['btn-' + theme.btn]"
+            :class="['btn-' + theme.btn.main]"
           >
             <font-awesome-icon icon="chevron-down" fixed-width />
             Load More

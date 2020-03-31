@@ -6,11 +6,13 @@
 const themes = {
     defaultTheme: 'light',
     light: {
-        btn: 'primary',  // bootstrap key
+        btn: {
+            main: 'primary',  // bootstrap theme key
+        },
         txt: '#222',  // raw
         bg: 'white',  // raw
         hdr: {
-            variant: 'primary',
+            variant: 'primary',  // bootstrap theme key
             lightOrDark: 'dark',  // 'dark' if background is dark(ish)
             fixed: null,  // fixed to top, ie always visible; null, 'top' or 'bottom'
         },
@@ -18,7 +20,7 @@ const themes = {
 
         },
         userBlock: {
-            bg: 'primary',
+            bg: 'primary',  // bootstrap theme key
             txt: 'white',
         },
     },
