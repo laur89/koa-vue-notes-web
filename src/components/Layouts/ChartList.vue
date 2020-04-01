@@ -25,6 +25,7 @@
           <div>
             <b-table
                     id="chartlist-table"
+                    ref="chartlist"
                     :items="charts"
                     :fields="fields"
                     :sort-by.sync="sortBy"
@@ -118,6 +119,8 @@ export default {
       });
     },
     onRowSelectedSingle(items) {
+      if (!Array.isArray(items) || !items.length) return
+      this.$refs.chartlist.clearSelected();  // unselect the chart row, otherwise on history.back() it'll still be selected when/if our view is cached
       this.openChart(items[0]);
     },
     customAttrs(item, type) {
