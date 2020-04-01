@@ -9,8 +9,8 @@
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
       <b-navbar-brand :to="{ name: 'home' }">
-        <img v-if="theme.lightOrDark === 'dark'" src="@/assets/lean-logo-dark.png" alt="Powered by QC Lean">
-        <img v-else src="@/assets/lean-letters-white.png" alt="Powered by QC Lean">
+        <img v-if="theme.lightOrDark === 'dark'" src="@/assets/lean-logo-subtxt-grey-25.png" alt="Powered by QC Lean">
+        <img v-else src="@/assets/lean-logo-subtxt-white-25.png" alt="Powered by QC Lean">
       </b-navbar-brand>
 
       <b-collapse is-nav id="nav_collapse">

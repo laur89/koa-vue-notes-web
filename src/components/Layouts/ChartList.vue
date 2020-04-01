@@ -119,7 +119,7 @@ export default {
       });
     },
     onRowSelectedSingle(items) {
-      if (!Array.isArray(items) || !items.length) return
+      if (!Array.isArray(items) || !items.length) return;
       this.$refs.chartlist.clearSelected();  // unselect the chart row, otherwise on history.back() it'll still be selected when/if our view is cached
       this.openChart(items[0]);
     },
@@ -144,9 +144,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~@/assets/css/components/_variables.scss";
+/*@import "~@/assets/css/components/_variables.scss";
 
-/*.chart-block {
+.chart-block {
   &__chart {
     //background: lighten($light-grey, 2%);
     padding: 10px;
