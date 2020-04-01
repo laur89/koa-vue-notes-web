@@ -6,8 +6,8 @@
         <div class="row">
           <div class="col-12">
             <p>
-              Charting platform powered by <a href="https://github.com/QuantConnect/Lean">LEAN trading engine</a>,
-              a <a href="https://www.quantconnect.com">QuantConnect product</a>
+              Charting platform powered by <a href="https://github.com/QuantConnect/Lean"> LEAN trading engine</a>,
+              a <a href="https://www.quantconnect.com">QuantConnect</a> <img src="@/assets/images/qc-logo-no-text-25.png" alt="QC"> product
             </p>
           </div>
         </div>
