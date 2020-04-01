@@ -12,10 +12,6 @@
                          :color-grid="colors.colorGrid"
                          :color-text="colors.colorText">
             ></trading-vue>
-            <span class="night-mode">
-                  <input type="checkbox" v-model="night">
-                  <label>NM</label>
-            </span>
       </div>
 </template>
 
@@ -273,12 +269,11 @@
                               //colorGrid: '#eee',
                               //colorText: '#333',
                         //},
-                        night: true
                   };
             },
             computed: {
                   colors() {
-                        return this.night ? {} : {
+                        return this.theme.lightOrDark === 'dark' ? {} : {
                               colorBack: '#fff',
                               colorGrid: '#eee',
                               colorText: '#333'
@@ -286,6 +281,7 @@
                   },
                   ...mapState({
                         showFooter: state => state.common.showFooter,
+                        theme: state => state.common.theme,
                   }),
             },
       };
@@ -299,16 +295,6 @@
             overflow: hidden;
             height: 100%;
             width: 100%;
-      }
-      .night-mode {
-            position: absolute;
-            top: 10px;
-            right: 70px;
-            color: #888;
-            font: 11px -apple-system,BlinkMacSystemFont,
-            Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,
-            Fira Sans,Droid Sans,Helvetica Neue,
-            sans-serif
       }
 </style>
 

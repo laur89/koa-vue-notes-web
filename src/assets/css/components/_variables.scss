@@ -44,15 +44,21 @@ $transition: all 0.2s ease;
 
 //Overriding the theme and base colors
 $theme-colors: (
-  primary: $blue,
+  light-primary: $blue,
   secondary: $grey,
   success: $green,
   info: $light-blue,
   warning: $yellow,
   danger: $red,
   light: $white,
-  dark: $black
+  dark: $black,
+
+  dark-header-bg: $black,
+  dark-primary: #f5ae29,
+  dark-bg: #747474,
+  darker: #222225,
 );
+
 $colors: (
   "blue": $blue,
   //"indigo":     $indigo,

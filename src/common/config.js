@@ -4,23 +4,42 @@
  * @type {{}}
  */
 const themes = {
-    defaultTheme: 'light',
+    defaultTheme: 'dark',
     light: {
         btn: {
-            main: 'primary',  // bootstrap theme key
+            main: 'light-primary',  // bootstrap theme key
         },
         txt: '#222',  // raw
         bg: 'white',  // raw
         hdr: {
-            variant: 'primary',  // bootstrap theme key
+            variant: 'light-primary',  // bootstrap theme key
             lightOrDark: 'dark',  // 'dark' if background is dark(ish)
             fixed: null,  // fixed to top, ie always visible; null, 'top' or 'bottom'
         },
+        lightOrDark: 'light',
         ftr: {  // footer
-
         },
         userBlock: {
-            bg: 'primary',  // bootstrap theme key
+            bg: 'light-primary',  // bootstrap theme key
+            txt: 'white',
+        },
+    },
+    dark: {
+        btn: {
+            main: 'dark-primary',  // bootstrap theme key
+        },
+        txt: '#C5C8C6',  // raw
+        bg: '#26262a',  // raw
+        hdr: {
+            variant: 'dark-header-bg',  // bootstrap theme key
+            lightOrDark: 'dark',  // 'dark' if background is dark(ish)
+            fixed: null,  // fixed to top, ie always visible; null, 'top' or 'bottom'
+        },
+        lightOrDark: 'dark',
+        ftr: {  // footer
+        },
+        userBlock: {
+            bg: 'darker',  // bootstrap theme key
             txt: 'white',
         },
     },
