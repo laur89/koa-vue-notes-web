@@ -1,7 +1,7 @@
 <template>
       <div>
             <!-- This tmpl based on TradingVueJs 101 (example from 'Getting Started' ) -->
-            <trading-vue :id="['chart-view-' + this.algoId]"
+            <trading-vue :id="'chart-view-' + this.algoId"
                          class='chart-view'
                          ref="tradingVue"
                          :gap_collapse="2"

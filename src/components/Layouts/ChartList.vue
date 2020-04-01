@@ -4,17 +4,11 @@
       <div class="row justify-content-center">
         <!-- This is where the main content goes. -->
         <div class="col-md-6">
-          <router-link
-                  :to="{ name: 'createNote' }"
-                  class="btn mb-3"
-                  :class="['btn-' + theme.btn.main]">
-            Create Note TODO delme</router-link
-          >
           <div v-if="!charts.length && completedFirstPass">
             Looks like no current nor historic algo charts are available.
           </div>
 
-          <div class="chart-block">
+          <!--div class="chart-block">
             <div v-for="chart in charts" :key="chart.id" class="row">
               <div class="col-12">
                 <div class="chart-block__chart" @click="openChart(chart)">
@@ -27,6 +21,27 @@
                 </div>
               </div>
             </div>
+          </div-->
+          <div>
+            <b-table
+                    id="chartlist-table"
+                    :items="charts"
+                    :fields="fields"
+                    :sort-by.sync="sortBy"
+                    :sort-desc.sync="sortDesc"
+                    hover
+                    :dark="theme.lightOrDark === 'dark'"
+                    :head-variant="theme.lightOrDark"
+                    :table-variant="theme.lightOrDark"
+                    selectable
+                    :select-mode="selectMode"
+                    @row-selected="onRowSelectedSingle"
+                    primary-key="id"
+                    responsive="sm"
+                    striped
+                    :tbody-tr-class="customAttrs"
+                    :busy.sync="isBusy"
+            ></b-table>
           </div>
 
           <button
@@ -58,11 +73,23 @@ export default {
         order: "desc",
         page: 0,
         limit: 20
-      }
+      },
+      fields: [
+        { key: 'id', label: 'ID', sortable: true },
+        { key: 'type', label: 'Type', sortable: true },
+        { key: 'startedAt', label: 'Started At', sortable: true },
+        { key: 'running', label: 'Running?', sortable: true }
+      ],
+      sortBy: 'startedAt',
+      sortDesc: true,
+      selectMode: 'single',
+      isBusy: false
     };
   },
   methods: {
     async loadAlgos() {
+      this.isBusy = true;
+
       try {
         const response = await this.$store.dispatch(
           "chart/getUserCharts",
@@ -80,6 +107,8 @@ export default {
         if (this.completedFirstPass === false) {
           this.completedFirstPass = true;
         }
+
+        this.isBusy = false;
       }
     },
     openChart(chart) {
@@ -87,7 +116,14 @@ export default {
         name: "openChart",
         query: { id: chart.id }
       });
-    }
+    },
+    onRowSelectedSingle(items) {
+      this.openChart(items[0]);
+    },
+    customAttrs(item, type) {
+      if (type !== 'row' || !item) return;
+      if (item.running) return ['table-success', 'text-dark']
+    },
   },
   computed: {
     ...mapGetters({
@@ -107,9 +143,9 @@ export default {
 <style lang="scss" scoped>
 @import "~@/assets/css/components/_variables.scss";
 
-.chart-block {
+/*.chart-block {
   &__chart {
-    background: lighten($light-grey, 2%);
+    //background: lighten($light-grey, 2%);
     padding: 10px;
     border-radius: 6px;
     margin-bottom: 20px;
@@ -120,5 +156,5 @@ export default {
       opacity: 0.8;
     }
   }
-}
+}*/
 </style>
