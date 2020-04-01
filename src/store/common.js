@@ -8,17 +8,27 @@ const common = {
   namespaced: true,
 
   state: {
-    themeName: themes.defaultTheme,
+    //themeName: themes.defaultTheme,
     theme: themes[themes.defaultTheme],
     showFooter: true,
+    chartVisible: false,
+    darkModeEnabled: true,
+  },
+  getters: {
+    hdrStyle(state) {
+      return state.chartVisible ? {} : {marginBottom: '20px'};  // only add bottom buffer for navbar when we're not viewing a chart
+    },
   },
   mutations: {
-    SET_FOOTER_VISIBILITY(state, show) {
+    SET_FOOTER_VISIBILITY(state, show) {  // TODO: drop this and instead create showFooter() getter that's based on state.chartVisible value??
       state.showFooter = show;
     },
-    CHANGE_THEME(state, newThemeName) {
-      state.theme = themes[newThemeName] || themes[state.themeName];
-      state.themeName = newThemeName;  // needs to be last
+    SET_CHART_VISIBLE(state, chartVisible) {
+      state.chartVisible = !!chartVisible;
+    },
+    TOGGLE_THEME(state, isDark) {
+      state.theme = themes[isDark ? 'dark' : 'light'];
+      state.darkModeEnabled = isDark;
     },
   },
 };

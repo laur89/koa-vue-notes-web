@@ -144,6 +144,7 @@
                   //}
                   ...mapMutations('common', [
                         'SET_FOOTER_VISIBILITY',
+                        'SET_CHART_VISIBLE',
                   ]),
             },
             // all keys under here will be topics we subscribe to (and will be automatically unsubscribed on unmount):
@@ -211,6 +212,7 @@
                   if (this.oldFooterVisibility) {  // if footer is shown, hide it
                         this.SET_FOOTER_VISIBILITY(false);
                   }
+                  this.SET_CHART_VISIBLE(true);
             },
             mounted() {
                   this.notify('we are mounted');
@@ -243,6 +245,7 @@
                   this.$socket.emit('unsub_chart', this.algoId);
                   window.removeEventListener('resize', this.onResize);
                   this.SET_FOOTER_VISIBILITY(this.oldFooterVisibility);  // restore footer visibility
+                  this.SET_CHART_VISIBLE(false);
 
                   // note this is an example of manually managing subscription-unsubscription:
                   //this.sockets.unsubscribe(chartId);
@@ -273,7 +276,7 @@
             },
             computed: {
                   colors() {
-                        return this.theme.lightOrDark === 'dark' ? {} : {
+                        return this.theme.lightOrDark === 'dark' ? {colorBack: '#26262a'} : {
                               colorBack: '#fff',
                               colorGrid: '#eee',
                               colorText: '#333'

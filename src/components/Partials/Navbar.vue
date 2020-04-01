@@ -1,15 +1,16 @@
 <template>
   <div>
-    <b-navbar id="navbar-container" toggleable="lg" class="navbar-section shadow"
+    <b-navbar id="navbar-container" toggleable="lg" class="navbar-section"
+              :class="[theme.hdr.shadow]"
+              :style="hdrStyle"
               :variant="theme.hdr.variant"
               :fixed="theme.hdr.fixed"
               :type="theme.hdr.lightOrDark">
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
       <b-navbar-brand :to="{ name: 'home' }">
-        <!--<i class="fa fa-sticky-note fa-fw"></i> Koa-Vue-Notes-->
-        <img v-if="theme.hdr.lightOrDark === 'dark'" src="@/assets/lean-logo-3.png" alt="Powered by QC Lean">
-        <img v-else src="@/assets/lean-logo-2.png" alt="Powered by QC Lean">
+        <img v-if="theme.lightOrDark === 'dark'" src="@/assets/lean-logo-dark.png" alt="Powered by QC Lean">
+        <img v-else src="@/assets/lean-letters-white.png" alt="Powered by QC Lean">
       </b-navbar-brand>
 
       <b-collapse is-nav id="nav_collapse">
@@ -70,10 +71,14 @@
             </a>
           </li-->
 
-          <b-nav-item-dropdown v-if="user" id="user-cog-nav-dropdown" right>
+          <b-nav-item-dropdown v-if="user" id="user-cog-nav-dropdown" lazy right ref="userDropdown">
             <template slot="button-content"><font-awesome-icon icon="user-cog" fixed-width /></template>
-            <b-dropdown-item>test 1</b-dropdown-item>
-            <b-dropdown-item>test 2</b-dropdown-item>
+            <b-dropdown-form>
+              <b-form-checkbox v-model="toggleDarkMode" name="dark-mode-toggle" switch>
+                Dark mode
+              </b-form-checkbox>
+            </b-dropdown-form>
+            <b-dropdown-item>TODO foo</b-dropdown-item>
             <b-dropdown-divider></b-dropdown-divider>
             <b-dropdown-item @click="logout">Logout</b-dropdown-item>
           </b-nav-item-dropdown>
@@ -92,6 +97,17 @@ export default {
   data() {
     return {};
   },
+  mounted() {
+    /*
+    this.$root.$on('bv::dropdown::show', bvEvent => {
+      console.log('Dropdown is about to be shown', bvEvent)
+    });
+    this.$root.$on('bv::dropdown::hide', bvEvent => {
+      console.log('Dropdown is about to be hidden', bvEvent);
+      //bvEvent.preventDefault();
+    });
+   */
+  },
   methods: {
     async logout() {
       // As you can see, with Vuex we we need to fire logout methods
@@ -105,16 +121,25 @@ export default {
       // created methods - and when a user logs out they need to be
       // fully cleared.
       // location.reload()
-      document.location.href = "/";
-    }
+      document.location.href = '/';
+    },
   },
   computed: {
     ...mapGetters({
-      user: "user/user"
+      user: 'user/user',
+      hdrStyle: 'common/hdrStyle',
     }),
     ...mapState({
       theme: state => state.common.theme,
     }),
+    toggleDarkMode: {  // consider https://github.com/maoberlehner/vuex-map-fields
+      get() {
+        return this.$store.state.common.darkModeEnabled;
+      },
+      set(isDark) {
+        this.$store.commit('common/TOGGLE_THEME', isDark);
+      }
+    },
   }
 };
 </script>
@@ -122,15 +147,11 @@ export default {
 <style lang="scss" scoped>
 @import "~@/assets/css/components/_variables.scss";
 
-//.fa-sticky-note {
-//  color: yellow;
-//}
-
 //This is for the full bleed background
 //when using a container
 #navbar-container {
   //background-color: $blue;  // controlled by 'variant' class
-  margin-bottom: 20px;
+  //margin-bottom: 20px;  // now controlled dynamicaly
 
   .container-nav {
     padding-left: 0;
@@ -140,6 +161,10 @@ export default {
   .navbar {
     margin-bottom: 20px;
   }
+}
+
+#user-cog-nav-dropdown {
+  white-space: nowrap;  // don't allow text in items to wrap
 }
 
 // //When using fixed-top navbar, add this.

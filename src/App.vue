@@ -32,8 +32,6 @@ export default {
     theme: {
       immediate: true,  // execute at init
       handler(newVal, oldVal) {
-        console.log(newVal, oldVal);
-
         document.body.style.background = newVal.bg;
         document.body.style.color = newVal.txt;  // main foreground color
       },

@@ -15,6 +15,7 @@ const themes = {
             variant: 'light-primary',  // bootstrap theme key
             lightOrDark: 'dark',  // 'dark' if background is dark(ish)
             fixed: null,  // fixed to top, ie always visible; null, 'top' or 'bottom'
+            shadow: '',  // bootstrap shadow attr
         },
         lightOrDark: 'light',
         ftr: {  // footer
@@ -34,6 +35,7 @@ const themes = {
             variant: 'dark-header-bg',  // bootstrap theme key
             lightOrDark: 'dark',  // 'dark' if background is dark(ish)
             fixed: null,  // fixed to top, ie always visible; null, 'top' or 'bottom'
+            shadow: 'shadow',  // bootstrap shadow attr
         },
         lightOrDark: 'dark',
         ftr: {  // footer
