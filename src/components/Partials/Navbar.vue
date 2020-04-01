@@ -72,10 +72,10 @@
 
           <b-nav-item-dropdown v-if="user" id="user-cog-nav-dropdown" right>
             <template slot="button-content"><font-awesome-icon icon="user-cog" fixed-width /></template>
-            <b-dropdown-item @click="logout">Logout</b-dropdown-item>
-            <b-dropdown-item>two</b-dropdown-item>
+            <b-dropdown-item>test 1</b-dropdown-item>
+            <b-dropdown-item>test 2</b-dropdown-item>
             <b-dropdown-divider></b-dropdown-divider>
-            <b-dropdown-item>three</b-dropdown-item>
+            <b-dropdown-item @click="logout">Logout</b-dropdown-item>
           </b-nav-item-dropdown>
 
         </b-navbar-nav>
