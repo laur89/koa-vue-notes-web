@@ -59,15 +59,12 @@ Vue.use(new VueSocketIO({
     })
 );
 
-// Color issue
-// https://github.com/shakee93/vue-toasted/issues/112
 import Toasted from "vue-toasted";
 Vue.use(Toasted, {
-    theme: "toasted-primary",
-    position: "top-center",
-    duration: 2300
+    theme: 'toasted-primary',
+    position: 'top-right',
+    duration: 3000,
 });
-import "vue-toasted/dist/vue-toasted.min.css";
 
 import VueProgressBar from "vue-progressbar";
 Vue.use(VueProgressBar, {
@@ -77,11 +74,11 @@ Vue.use(VueProgressBar, {
     transition: {
         speed: "0.2s",
         opacity: "0.6s",
-        termination: 300
+        termination: 300,
     },
     autoRevert: true,
     location: "top",
-    inverse: false
+    inverse: false,
 });
 
 import "./assets/css/app.scss"; // app styles
