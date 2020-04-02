@@ -1,18 +1,14 @@
 <template>
   <div v-if="show">
     <div id="sticky-footer-spacing"></div>
-    <section id="footer-main" class="footer-main">
+    <footer id="footer-main" class="footer-main">
       <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <p>
-              Charting platform powered by <a href="https://github.com/QuantConnect/Lean"> LEAN trading engine</a>,
-              a <a href="https://www.quantconnect.com">QuantConnect</a> <img src="@/assets/images/qc-logo-no-text-25.png" alt="QC"> product
-            </p>
-          </div>
-        </div>
+        <span>
+          Charting platform powered by <a href="https://github.com/QuantConnect/Lean"> LEAN trading engine</a>,
+          a <a href="https://www.quantconnect.com">QuantConnect</a> <img src="@/assets/images/qc-logo-no-text-25.png" alt="QC"> product
+        </span>
       </div>
-    </section>
+    </footer>
   </div>
 </template>
 
@@ -44,13 +40,13 @@ div#sticky-footer-spacing {
   height: 50px;
 }
 
-#footer-main {
+footer#footer-main {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 50px;
+  height: 50px;  // fixed footer height
+  line-height: 50px; /* Vertically center the text there */
   background-color: $light-grey;
-  padding: 10px 0;
   text-align: center;
   color: lighten($black, 25%);
 
