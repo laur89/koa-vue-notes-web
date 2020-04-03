@@ -2,13 +2,13 @@
   <div id="app">
     <vue-progress-bar></vue-progress-bar>
 
-    <navbar></navbar>
+    <navbar ref="navbar"></navbar>
 
     <keep-alive include="account">
       <router-view></router-view>
     </keep-alive>
 
-    <footer-main></footer-main>
+    <footer-main ref="footer"></footer-main>
   </div>
 </template>
 
@@ -29,7 +29,7 @@ export default {
     }),
   },
   watch: {
-    theme: {
+    theme: {  // change the global theme settings (global as in on body element et al)
       immediate: true,  // execute at init
       handler(newVal, oldVal) {
         document.body.style.background = newVal.bg;

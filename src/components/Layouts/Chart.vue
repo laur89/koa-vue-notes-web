@@ -10,7 +10,9 @@
                          :toolbar="true"
                          :color-back="colors.colorBack"
                          :color-grid="colors.colorGrid"
-                         :color-text="colors.colorText">
+                         :color-text="colors.colorText"
+                         :legend-buttons="buttons"
+                         @legend-button-click="on_button_click"
             ></trading-vue>
       </div>
 </template>
@@ -146,6 +148,18 @@
                         'SET_FOOTER_VISIBILITY',
                         'SET_CHART_VISIBLE',
                   ]),
+                  on_button_click(event) {
+                        if (event.button === 'display') {
+                              const d = this.chart[event.type][event.dataIndex];
+                              if (d) {
+                                    if (!('display' in d.settings)) {
+                                          this.$set(d.settings, 'display', true);
+                                    }
+                                    this.$set(d.settings, 'display', !d.settings.display)
+                              }
+                        }
+                        console.log(event)
+                  },
             },
             // all keys under here will be topics we subscribe to (and will be automatically unsubscribed on unmount):
             sockets: {
@@ -166,18 +180,18 @@
                         // TODO: where do we set chart type??
 
                         this.chartName = conf.chartName;
-                        //console.log(JSON.stringify(this.dc.data));
-                        if (isEmpty(this.dc.data.chart.settings)) {
-                              this.dc.set('chart.settings', conf.settings);
-                              this.dc.data.chart.type = conf.type;  // assuming type won't change later on
+                        //console.log(JSON.stringify(this.chart.data));
+                        if (isEmpty(this.chart.data.chart.settings)) {
+                              this.chart.set('chart.settings', conf.settings);
+                              this.chart.data.chart.type = conf.type;  // assuming type won't change later on
                               //console.log('kek YESSS' + JSON.stringify(conf));
                         } else {
-                              this.dc.merge('chart.settings', conf.settings);
+                              this.chart.merge('chart.settings', conf.settings);
                               //
                               // console.log('kekNO ' + JSON.stringify(conf));
                         }
 
-                        this.dc.merge('chart.data', data);  // TODO: DC should start truncating ends on merge
+                        this.chart.merge('chart.data', data);  // TODO: DC should start truncating ends on merge
 
 
                         //const latestTime = data.chart.chart.data[data.chart.chart.data.length - 1][0];
@@ -193,15 +207,15 @@
                         //data.{id,meta,data}
 
                         const {data, meta} = data_;
-                        console.log(JSON.stringify(this.dc.data));
-                        if (isEmpty(this.dc.data.chart.settings)) {
-                              this.dc.set('chart.settings', meta);
+                        console.log(JSON.stringify(this.chart.data));
+                        if (isEmpty(this.chart.data.chart.settings)) {
+                              this.chart.set('chart.settings', meta);
                               console.log('kek YESSS' + JSON.stringify(meta));
                         } else {
-                              this.dc.merge('chart.settings', meta);
+                              this.chart.merge('chart.settings', meta);
                               console.log('kekNO ' + JSON.stringify(meta));
                         }
-                        this.dc.merge('chart.data', data);
+                        this.chart.merge('chart.data', data);
                   },
                   //offchart(data_) {
             },
@@ -215,7 +229,7 @@
                   this.SET_CHART_VISIBLE(true);
             },
             mounted() {
-                  this.notify('we are mounted');
+                  //this.notify('we are mounted');
 
                   this.navbar = document.getElementById('navbar-container');  // TODO: this should be a getter in common.js instead!
                   if (this.showFooter) this.footer = document.getElementById('footer-main');
@@ -251,22 +265,25 @@
                   //this.sockets.unsubscribe(chartId);
             },
             data() {
-                  // TODO: think no point in setting this.dc, it's accessible via this.chart anyways
-                  this.dc = new DataCube({
+                  const dc = new DataCube({
                         chart: {
                               name: 'myassetchart',  // TODO: 'name' is not used by tv is it?
-                              data: []
+                              data: [],
                         },
                         onchart: [],
                         offchart: []
                   });
-                  window.dc = this.dc;  // for debug
+                  window.dc = dc;  // for debug
+
                   return {
-                        chart: this.dc,
+                        chart: dc,
                         chartName: 'Waiting for downlink...',
                         //chart: Data,
                         width: window.innerWidth,
                         height: 0,
+                        buttons: [
+                              'display', //'settings', 'remove'
+                        ],
                         //colors: {
                               //colorBack: '#fff',
                               //colorGrid: '#eee',

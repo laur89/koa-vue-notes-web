@@ -45,7 +45,7 @@ footer#footer-main {
   bottom: 0;
   width: 100%;
   height: 50px;  // fixed footer height
-  line-height: 50px; /* Vertically center the text there */
+  line-height: 50px;  // vertically center the text there
   background-color: $light-grey;
   text-align: center;
   color: lighten($black, 25%);
