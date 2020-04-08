@@ -64,6 +64,9 @@ Vue.use(Toasted, {
     theme: 'toasted-primary',
     position: 'top-right',
     duration: 3000,
+    keepOnHover: true, // do not fade away if mouse is over
+    iconPack: 'fontawesome',
+    singleton: false,  // whether to allow single toast at a time
 });
 
 import VueProgressBar from "vue-progressbar";

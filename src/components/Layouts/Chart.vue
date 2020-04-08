@@ -12,7 +12,7 @@
                          :color-grid="colors.colorGrid"
                          :color-text="colors.colorText"
                          :legend-buttons="buttons"
-                         @legend-button-click="on_button_click"
+                         @legend-button-click="on_legend_button_click"
             ></trading-vue>
       </div>
 </template>
@@ -77,7 +77,7 @@
 
                               return data;
                         } catch (error) {
-                              this.$toasted.error(`getTail: there was an error connecting to the server: ${error}`);
+                              this.$toasted.error(`getTail: error connecting to the server`);
                         }
                   },
                   async getSlice(anchorTime, numberOfDataPoints, direction, tf, cb) {
@@ -96,7 +96,7 @@
                                       }
                               );
                         } catch (error) {
-                              this.$toasted.error("getSlice: there was an error connecting to the server.");
+                              this.$toasted.error(`getSlice: error connecting to the server`);
                         }
                   },
 
@@ -148,9 +148,10 @@
                         'SET_FOOTER_VISIBILITY',
                         'SET_CHART_VISIBLE',
                   ]),
-                  on_button_click(event) {
+                  on_legend_button_click(event) {
+                        //console.log(event);
                         if (event.button === 'display') {
-                              const d = this.chart[event.type][event.dataIndex];
+                              const d = this.chart.data[event.type][event.dataIndex];
                               if (d) {
                                     if (!('display' in d.settings)) {
                                           this.$set(d.settings, 'display', true);
@@ -158,7 +159,6 @@
                                     this.$set(d.settings, 'display', !d.settings.display)
                               }
                         }
-                        console.log(event)
                   },
             },
             // all keys under here will be topics we subscribe to (and will be automatically unsubscribed on unmount):
@@ -166,7 +166,7 @@
                   // note connect is also filed on re-connections, so do not subscribe to rooms/events in here!
                   connect() {
                         console.log('socket connected');
-                        this.notify('socket connected')
+                        //this.notify('socket connected')
                   },
                   chart(data_) {
                         this.notify('chart update via SOCK');
@@ -229,8 +229,6 @@
                   this.SET_CHART_VISIBLE(true);
             },
             mounted() {
-                  //this.notify('we are mounted');
-
                   this.navbar = document.getElementById('navbar-container');  // TODO: this should be a getter in common.js instead!
                   if (this.showFooter) this.footer = document.getElementById('footer-main');
 
@@ -271,7 +269,7 @@
                               data: [],
                         },
                         onchart: [],
-                        offchart: []
+                        offchart: [],
                   });
                   window.dc = dc;  // for debug
 
