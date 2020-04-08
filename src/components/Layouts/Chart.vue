@@ -6,7 +6,7 @@
                          ref="tradingVue"
                          :gap_collapse="2"
                          :data="chart" :width="width" :height="height"
-                         :title-txt="this.chartName"
+                         :title-txt="chart.data.chart.name"
                          :toolbar="true"
                          :color-back="colors.colorBack"
                          :color-grid="colors.colorGrid"
@@ -72,8 +72,8 @@
                                       }
                               );
 
-                              this.chartName = data.chart.chartName;
-                              delete data.chart.chartName;
+                              //this.chartName = data.chart.chartName;
+                              //delete data.chart.chartName;
 
                               return data;
                         } catch (error) {
@@ -108,10 +108,10 @@
                         this.sockets.subscribe('data', data => {
                               window.console.log(`   - GOT  LIVE DATA: ${JSON.stringify(data)}`);
 
-                              if (data.hasOwnProperty('chartName')) {
-                                    this.chartName = data.chartName;
-                                    delete data.chartName;
-                              }
+                              //if (data.hasOwnProperty('chartName')) {
+                              //      this.chartName = data.chartName;
+                              //      delete data.chartName;
+                              //}
 
                               onLiveData(data);
                         });
@@ -179,7 +179,7 @@
 
                         // TODO: where do we set chart type??
 
-                        this.chartName = conf.chartName;
+                        //this.chartName = conf.chartName;
                         //console.log(JSON.stringify(this.chart.data));
                         if (isEmpty(this.chart.data.chart.settings)) {
                               this.chart.set('chart.settings', conf.settings);
@@ -265,7 +265,7 @@
             data() {
                   const dc = new DataCube({
                         chart: {
-                              name: 'myassetchart',  // TODO: 'name' is not used by tv is it?
+                              name: 'Waiting for downlink...',
                               data: [],
                         },
                         onchart: [],
@@ -275,7 +275,7 @@
 
                   return {
                         chart: dc,
-                        chartName: 'Waiting for downlink...',
+                        //chartName: 'Waiting for downlink...',
                         //chart: Data,
                         width: window.innerWidth,
                         height: 0,
@@ -294,7 +294,7 @@
                         return this.theme.lightOrDark === 'dark' ? {colorBack: '#26262a'} : {
                               colorBack: '#fff',
                               colorGrid: '#eee',
-                              colorText: '#333'
+                              colorText: '#333',
                         }
                   },
                   ...mapState({
