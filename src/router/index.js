@@ -93,7 +93,7 @@ const router = new Router({
       path: "/charts",
       component: ChartList,
       name: "charts",
-      meta: { title: "Charts", requiresAuth: false }  // TODO: should we require auth?
+      meta: { title: "Charts", requiresAuth: true }
     },
     {
       path: "/chart",
@@ -136,8 +136,8 @@ router.beforeEach((to, from, next) => {
   // access/refresh tokens.
   if (accessToken) {
     router.app.$options.store.dispatch("user/setUserAndTokens", {
-      accessToken: accessToken,
-      refreshToken: refreshToken
+      accessToken,
+      refreshToken,
     });
   }
 

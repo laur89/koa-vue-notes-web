@@ -7,17 +7,16 @@
 
           <div class="callout-panel">
             <p>
-              Like the project? Then checkout my latest work - RSVP Keeper -
-              it's made using Vue!
+              This project is for charting the LEAN trading engine output.
             </p>
             <a
-              href="https://www.rsvpkeeper.com/?ref=koa-vue-notes-web"
+              href="https://www.quantconnect.com"
               target="_blank"
               rel="noopener noreferrer"
             >
               <img
-                src="@/assets/images/social.png"
-                alt="RSVP Keeper"
+                src="@/assets/images/qc-logo-orig.png"
+                alt="QC LEAN"
                 class="img-fluid"
               />
             </a>
@@ -25,7 +24,7 @@
 
           <p>
             Here will be a check to see if you are currently logged in and your
-            user info.
+            user info:
           </p>
 
           <p v-if="user"><font-awesome-icon icon="user" fixed-width /> You: {{ user }}</p>
@@ -33,124 +32,61 @@
 
           <p>
             <font-awesome-icon icon="info-circle" fixed-width /> This is a simple SPA built
-            using Koa (2.5.1) as the backend and Vue (2.6.8) as the frontend. If
+            using Koa (2.x) as the backend and Vue (2.x) as the frontend. If
             you don't want to create an account you can just use
             <strong>demousername</strong> and <strong>demopassword</strong> to
-            login to the app.
+            login.
           </p>
 
           <p>
-            This site has a sister! Visit it here -
-            <a href="https://koa-react-notes-web.innermonkdesign.com"
-              >https://koa-react-notes-web.innermonkdesign.com</a
-            >. It's the exact same app - but written in React!
-          </p>
+            LEAN engine -
+            <a href="https://github.com/QuantConnect/Lean"
+              >https://github.com/QuantConnect/Lean</a
+            ></p>
 
           <hr />
 
           <p>
             <a
-              href="https://github.com/johndatserakis/koa-vue-notes-web"
+              href="https://github.com/QuantConnect/Lean"
               target="_blank"
               class="d-inline-block mb-2"
               ><img
-                src="https://img.shields.io/badge/frontend--social.svg?style=social"
+                src="https://img.shields.io/badge/LEAN--social.svg?style=social"
                 alt=""
             /></a>
 
             &nbsp;
 
             <a
-              href="https://twitter.com/intent/tweet?text=Check+out+this+project+on+GitHub:+https://github.com/johndatserakis/koa-vue-notes-web&url=%5Bobject%20Object%5D"
-              target="_blank"
-            >
-              <img
-                src="https://img.shields.io/twitter/url/https/github.com/johndatserakis/koa-vue-notes-web.svg?style=social"
-                alt=""
-            /></a>
-
-            &nbsp;
-
-            <a
-              href="https://raw.githubusercontent.com/johndatserakis/koa-vue-notes-web/master/LICENSE"
+              href="https://raw.githubusercontent.com/QuantConnect/Lean/master/LICENSE"
               target="_blank"
               ><img
-                src="https://img.shields.io/badge/license-MIT-blue.svg"
+                src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"
                 alt=""
             /></a>
 
             &nbsp;
 
             <a
-              href="https://github.com/johndatserakis/koa-vue-notes-web/stargazers"
+              href="https://github.com/QuantConnect/Lean/stargazers"
               target="_blank"
               ><img
-                src="https://img.shields.io/github/stars/johndatserakis/koa-vue-notes-web.svg"
+                src="https://img.shields.io/github/stars/QuantConnect/Lean.svg"
                 alt=""
             /></a>
 
             &nbsp;
 
             <a
-              href="https://github.com/johndatserakis/koa-vue-notes-web/network"
+              href="https://github.com/QuantConnect/Lean/network"
               target="_blank"
               ><img
-                src="https://img.shields.io/github/forks/johndatserakis/koa-vue-notes-web.svg"
+                src="https://img.shields.io/github/forks/QuantConnect/Lean.svg"
                 alt=""
             /></a>
 
             &nbsp;
-          </p>
-
-          <p class="mb-5">
-            <a
-              href="https://github.com/johndatserakis/koa-vue-notes-api"
-              target="_blank"
-              class="d-inline-block mb-2"
-              ><img
-                src="https://img.shields.io/badge/Backend--social.svg?style=social"
-                alt=""
-            /></a>
-
-            &nbsp;
-
-            <a
-              href="https://twitter.com/intent/tweet?text=Check+out+this+project+on+GitHub:+https://github.com/johndatserakis/koa-vue-notes-api&url=%5Bobject%20Object%5D"
-              target="_blank"
-              ><img
-                src="https://img.shields.io/twitter/url/https/github.com/johndatserakis/koa-vue-notes-api.svg?style=social"
-                alt=""
-            /></a>
-
-            &nbsp;
-
-            <a
-              href="https://raw.githubusercontent.com/johndatserakis/koa-vue-notes-api/master/LICENSE"
-              target="_blank"
-              ><img
-                src="https://img.shields.io/badge/license-MIT-blue.svg"
-                alt=""
-            /></a>
-
-            &nbsp;
-
-            <a
-              href="https://github.com/johndatserakis/koa-vue-notes-api/stargazers"
-              target="_blank"
-              ><img
-                src="https://img.shields.io/github/stars/johndatserakis/koa-vue-notes-api.svg"
-                alt=""
-            /></a>
-
-            &nbsp;
-
-            <a
-              href="https://github.com/johndatserakis/koa-vue-notes-api/network"
-              target="_blank"
-              ><img
-                src="https://img.shields.io/github/forks/johndatserakis/koa-vue-notes-api.svg"
-                alt=""
-            /></a>
           </p>
         </div>
       </div>

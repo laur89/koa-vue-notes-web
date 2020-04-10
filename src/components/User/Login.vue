@@ -101,10 +101,10 @@ export default {
   data() {
     return {
       credentials: {
-        username: "",
-        password: ""
+        username: '',
+        password: '',
       },
-      pending: false
+      pending: false,
     };
   },
   methods: {
@@ -118,15 +118,15 @@ export default {
 
       const credentials = {
         username: this.credentials.username,
-        password: this.credentials.password
+        password: this.credentials.password,
       };
 
       try {
         await this.$store.dispatch("user/userLogin", credentials);
-        this.credentials.username = "";
-        this.credentials.password = "";
+        this.credentials.username = '';
+        this.credentials.password = '';
         this.$v.$reset();
-        this.$router.push({ name: "account" });
+        this.$router.push({ name: 'home' });  // redirect here upon login; TODO: redirect to where user originally tried to go
       } catch (error) {
         this.$toasted.error("Hmm, those details don't seem right.");
       } finally {
