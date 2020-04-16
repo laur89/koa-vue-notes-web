@@ -6,7 +6,6 @@
                          ref="tradingVue"
                          :gap_collapse="2"
                          :data="chart" :width="width" :height="height"
-                         :title-txt="chart.data.chart.name"
                          :toolbar="true"
                          :color-back="colors.colorBack"
                          :color-grid="colors.colorGrid"
@@ -48,8 +47,8 @@
                         this.height = this.getHeight();
                   },
                   getHeight() {
-                        //return window.innerHeight - 100 - 76;  // 100 is tied to footer; 76 seems to be hdr 56 +20 padding?
-                        let i = window.innerHeight - outerHeight(this.navbar);
+                        //let i = window.innerHeight - outerHeight(this.navbar);  // use this guy if navbar has margins
+                        let i = window.innerHeight - this.navbar.offsetHeight;
                         if (this.showFooter) i -= this.footer.offsetHeight;
 
                         return i;
@@ -62,13 +61,13 @@
                               duration : 5000
                         });
                   },
-                  async getTail() {
+                  async getTail(spanMs = 60000 * 1000) {
                         try {
                               const data = await this.$store.dispatch(
                                       'chart/getChartTail',
                                       {
                                             id: this.algoId,
-                                            span: 60000 * 1000 // TODO find a way to define; perhaps function of shown area, and maybe also decide part on backend based on default TF?
+                                            span: spanMs // TODO find a way to define; perhaps function of shown area, and maybe also decide part on backend based on default TF?
                                       }
                               );
 
@@ -221,12 +220,12 @@
             },
             created() {
                   this.algoId = this.$route.query.id;
+                  this.SET_CHART_VISIBLE(true);
                   this.oldFooterVisibility = this.showFooter;
 
                   if (this.oldFooterVisibility) {  // if footer is shown, hide it
                         this.SET_FOOTER_VISIBILITY(false);
                   }
-                  this.SET_CHART_VISIBLE(true);
             },
             mounted() {
                   this.navbar = document.getElementById('navbar-container');  // TODO: this should be a getter in common.js instead!

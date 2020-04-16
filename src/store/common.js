@@ -14,11 +14,6 @@ const common = {
     chartVisible: false,
     darkModeEnabled: true,
   },
-  getters: {
-    hdrStyle(state) {
-      return state.chartVisible ? {} : {marginBottom: '20px'};  // only add bottom buffer for navbar when we're not viewing a chart
-    },
-  },
   mutations: {
     SET_FOOTER_VISIBILITY(state, show) {  // TODO: drop this and instead create showFooter() getter that's based on state.chartVisible value??
       state.showFooter = show;

@@ -2,7 +2,6 @@
   <div>
     <b-navbar id="navbar-container" toggleable="lg" class="navbar-section py-1"
               :class="[theme.hdr.shadow]"
-              :style="hdrStyle"
               :variant="theme.hdr.variant"
               :fixed="theme.hdr.fixed"
               :type="theme.hdr.lightOrDark">
@@ -86,6 +85,7 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
+    <div v-if="!chartVisible" id="header-spacing"></div>
   </div>
 </template>
 
@@ -127,10 +127,10 @@ export default {
   computed: {
     ...mapGetters({
       user: 'user/user',
-      hdrStyle: 'common/hdrStyle',
     }),
     ...mapState({
       theme: state => state.common.theme,
+      chartVisible: state => state.common.chartVisible,
     }),
     toggleDarkMode: {  // consider https://github.com/maoberlehner/vuex-map-fields
       get() {
@@ -146,6 +146,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "~@/assets/css/components/_variables.scss";
+
+#header-spacing {
+  height: 20px;
+}
 
 //This is for the full bleed background
 //when using a container

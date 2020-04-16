@@ -22,7 +22,7 @@
               </div>
             </div>
           </div-->
-          <div>
+          <div v-if="charts.length">
             <b-table
                     id="chartlist-table"
                     ref="chartlist"
