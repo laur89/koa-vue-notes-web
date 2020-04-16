@@ -48,8 +48,7 @@ import VueSocketIO from 'vue-socket.io'
 Vue.use(new VueSocketIO({
         debug: true,
         //connection: io('http://localhost:4001', sockOpts), // options object is optional
-        //connection: process.env.VUE_APP_API_URL,
-        connection: 'http://localhost:4001',
+        connection: process.env.VUE_APP_SOCK_URL,
         vuex: {
             store,
             actionPrefix: "SOCKET_",
